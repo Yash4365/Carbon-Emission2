@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Carbon Calculator - EcoTrace</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="bg-slate-950 text-slate-100 min-h-screen">
+    <nav class="bg-slate-900 border-b border-slate-800 p-4">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <a href="index.html" class="text-xl font-black text-emerald-400"><i class="fa-solid fa-leaf mr-2"></i>EcoTrace Pro</a>
+            <div class="space-x-4 text-sm font-semibold text-slate-300">
+                <a href="index.html">Home</a>
+                <a href="calculator.html" class="text-emerald-400">Calculator</a>
+                <a href="dashboard.html">Dashboard</a>
+                <a href="terminal.html">API Terminal</a>
+                <a href="database.html">Database</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="max-w-7xl mx-auto p-8 space-y-6">
+        <h2 class="text-3xl font-black text-white"><i class="fa-solid fa-calculator text-emerald-400 mr-2"></i>Carbon Emission Calculator</h2>
+        <form id="calcForm" class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div class="bg-slate-900 p-6 rounded-2xl border border-slate-800 space-y-2">
+                <label class="text-xs font-bold text-slate-400">Electricity (kWh)</label>
+                <input type="number" id="calcElectricity" value="220" class="w-full bg-slate-950 border border-slate-800 rounded-lg p-2 text-white">
+            </div>
+            <div class="bg-slate-900 p-6 rounded-2xl border border-slate-800 space-y-2">
+                <label class="text-xs font-bold text-slate-400">Vehicle Driving (km)</label>
+                <input type="number" id="calcVehicle" value="310" class="w-full bg-slate-950 border border-slate-800 rounded-lg p-2 text-white">
+            </div>
+            <div class="bg-slate-900 p-6 rounded-2xl border border-slate-800 space-y-2">
+                <button type="button" onclick="handleCalculate()" class="w-full bg-emerald-400 text-slate-950 font-black py-3 rounded-xl mt-4">Compute via Express API</button>
+            </div>
+        </form>
+    </main>
+
+    <script src="js/api-client.js"></script>
+    <script>
+        async function handleCalculate() {
+            const payload = {
+                electricity: Number(document.getElementById('calcElectricity').value),
+                vehicle: Number(document.getElementById('calcVehicle').value)
+            };
+            const result = await ApiClient.calculateCarbon(payload);
+            alert(`Calculated CO2 Output: ${result.data.totalCO2 || result.data.total} kg`);
+        }
+    </script>
+</body>
+</html>

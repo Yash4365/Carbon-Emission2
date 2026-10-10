@@ -1,0 +1,14 @@
+{
+  "name": "ecotrace-enterprise-backend",
+  "version": "2.4.0",
+  "description": "Node.js Express Backend REST API for Carbon Footprint Analytics",
+  "main": "backend/server.js",
+  "scripts": {
+    "start": "node backend/server.js",
+    "dev": "nodemon backend/server.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.18.2"
+  }
+}
